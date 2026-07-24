@@ -1,6 +1,6 @@
 # Krishin Lal Portfolio
 
-Professional portfolio for Krishin Lal, an AI Engineer and Data Scientist specializing in production AI, document intelligence, semantic matching, forecasting, and Azure ML deployment.
+Professional portfolio for Krishin Lal, an AI Engineer and Data Scientist specializing in production AI, RAG and agentic systems, machine learning, data science, forecasting, semantic search, and Azure ML deployment.
 
 ## Local development
 

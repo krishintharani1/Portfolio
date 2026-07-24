@@ -28,7 +28,7 @@ const projects = [
     eyebrow: 'OCR + LLM validation',
     title: 'Trade Document Automation',
     summary: 'Handwritten trade cover pages went from a five-hour manual process to a 15-minute automated workflow.',
-    problem: 'UBL teams spent five hours each day manually processing trade batch cover pages, including difficult handwritten content.',
+    problem: 'Operations teams spent five hours each day manually processing trade batch cover pages, including difficult handwritten content.',
     built: 'A Python OCR workflow with Azure Document Intelligence and a custom LLM validation layer designed to handle handwritten fields reliably.',
     stack: ['Python', 'Azure Document Intelligence', 'LLM validation'],
     metric: '1,467',
@@ -40,9 +40,9 @@ const projects = [
     number: '03',
     eyebrow: 'Geospatial intelligence',
     title: 'Branch Expansion Planning',
-    summary: 'A decision system that found where UBL could expand, backed by competitor density rather than intuition.',
-    problem: 'Expansion teams needed to identify high-value branch locations while accounting for competitors and avoiding cannibalization of existing UBL branches.',
-    built: 'Mapped 2,200+ UBL and Silk Bank branches, geocoded 8,000+ competitor locations, built 1 x 1 km grids, then excluded areas within 500 m of existing UBL branches.',
+    summary: 'A decision system that found where the bank could expand, backed by competitor density rather than intuition.',
+    problem: 'Expansion teams needed to identify high-value branch locations while accounting for competitors and avoiding cannibalization of existing branches.',
+    built: 'Mapped 2,200+ internal and newly acquired branches, geocoded 8,000+ competitor locations, built 1 x 1 km grids, then excluded areas within 500 m of existing branches.',
     stack: ['SERP API', 'Geocoding', 'Spatial grid analysis', 'Python'],
     metric: '116',
     metricLabel: 'viable opportunity zones',
@@ -79,7 +79,7 @@ const projects = [
     number: '06',
     eyebrow: 'Enterprise OCR',
     title: 'Account Opening Automation',
-    summary: 'A reusable in-house document framework for forms arriving from every UBL branch nationwide.',
+    summary: 'A reusable in-house document framework for forms arriving from branches nationwide.',
     problem: 'Account-opening forms contain mixed structured and unstructured fields, while processing depended on a costly third-party vendor.',
     built: 'An end-to-end OCR pipeline extracting KYC details, customer information, and signatures into validated JSON ready for direct system integration.',
     stack: ['Document OCR', 'Field validation', 'JSON integration'],
@@ -89,6 +89,11 @@ const projects = [
     tone: 'violet',
   },
 ]
+
+const featuredProjects = [projects[3], projects[4], projects[2], projects[0], projects[1], projects[5]].map((project, index) => ({
+  ...project,
+  number: `0${index + 1}`,
+}))
 
 const additionalWork = [
   {
@@ -113,11 +118,11 @@ const additionalWork = [
 
 const expertise = [
   { title: 'LLM & Agentic AI', items: ['RAG architecture', 'LangChain', 'LangGraph', 'Azure OpenAI', 'Multi-agent orchestration', 'Prompt engineering'] },
-  { title: 'Document Intelligence', items: ['Azure Document Intelligence', 'Handwriting recognition', 'Table extraction', 'Layout analysis', 'Image preprocessing'] },
   { title: 'ML & Forecasting', items: ['Scikit-learn', 'TensorFlow', 'XGBoost', 'N-BEATS', 'NHITS', 'DeepAR', 'NeuralForecast'] },
-  { title: 'Search & Matching', items: ['SentenceTransformers', 'Hugging Face', 'Vector embeddings', 'ChromaDB', 'Cosine similarity', 'Semantic blocking'] },
   { title: 'Cloud & MLOps', items: ['Azure Machine Learning', 'FastAPI', 'Docker', 'API authentication', 'Request validation', 'Endpoint monitoring'] },
   { title: 'Data & Geospatial', items: ['Pandas', 'NumPy', 'SQL', 'Teradata', 'MongoDB', 'Spatial grids', 'Opportunity mapping'] },
+  { title: 'Search & Matching', items: ['SentenceTransformers', 'Hugging Face', 'Vector embeddings', 'ChromaDB', 'Cosine similarity', 'Semantic blocking'] },
+  { title: 'Document Intelligence', items: ['Azure Document Intelligence', 'Handwriting recognition', 'Table extraction', 'Layout analysis', 'Image preprocessing'] },
 ]
 
 const links = {
@@ -216,9 +221,16 @@ function Hero() {
           Applied AI<span className="text-accent">,</span><br />built for <span className="text-outline">impact.</span>
         </motion.h1>
         <div className="mt-12 grid gap-9 lg:grid-cols-[1fr_1fr] lg:items-end">
-          <motion.p initial={reduceMotion ? false : { opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25, duration: 0.7 }} className="max-w-xl text-lg leading-8 text-secondary sm:text-xl">
-            I&apos;m <strong className="font-semibold text-white">Krishin Lal</strong>, an AI Engineer and Data Scientist turning document-heavy, manual operations into fast, measurable production systems.
-          </motion.p>
+          <motion.div initial={reduceMotion ? false : { opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25, duration: 0.7 }}>
+            <p className="max-w-2xl text-lg leading-8 text-secondary sm:text-xl">
+              I&apos;m <strong className="font-semibold text-white">Krishin Lal</strong>, an AI Engineer and Data Scientist building production AI, machine learning, and data systems that turn ambitious ideas into measurable outcomes.
+            </p>
+            <div className="mt-6 flex max-w-2xl flex-wrap gap-x-5 gap-y-2 font-mono text-[9px] uppercase tracking-[0.13em] text-muted sm:text-[10px]">
+              {['Production AI', 'RAG + agentic systems', 'Predictive ML', 'Data + decision systems'].map((capability) => (
+                <span key={capability} className="flex items-center gap-2"><span className="size-1 rounded-full bg-accent" />{capability}</span>
+              ))}
+            </div>
+          </motion.div>
           <motion.div initial={reduceMotion ? false : { opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.38, duration: 0.7 }} className="flex flex-wrap gap-3 lg:justify-end">
             <a href="#work" className="button-primary">Explore selected work <ArrowIcon /></a>
             <a href={links.email} className="button-secondary">Discuss a project <ArrowIcon diagonal /></a>
@@ -249,10 +261,10 @@ function About() {
           <p className="font-mono text-xs uppercase leading-6 tracking-[0.15em] text-accent">Karachi, Pakistan<br />Production AI systems</p>
         </Reveal>
         <Reveal delay={0.08}>
-          <h2 className="section-heading max-w-4xl">I work where AI leaves the demo and meets the <span className="text-secondary">real operation.</span></h2>
+          <h2 className="section-heading max-w-4xl">I turn AI and data ideas into <span className="text-secondary">production systems.</span></h2>
           <div className="mt-9 grid gap-6 text-base leading-7 text-secondary sm:grid-cols-2 sm:text-lg sm:leading-8">
-            <p>My strongest work is end-to-end: understanding the business bottleneck, choosing the right model, building the data path, and shipping a monitored service teams can depend on.</p>
-            <p>At UBL, that has meant OCR systems for handwritten and structured documents, semantic matching at scale, geospatial decision intelligence, and deep-learning forecasts deployed on Azure.</p>
+            <p>My strongest work is end-to-end: framing the right data problem, designing the architecture, choosing and evaluating models, and shipping a monitored service teams can depend on.</p>
+            <p>My work spans RAG and agentic architectures, semantic search, predictive ML, forecasting, geospatial analytics, document intelligence, and Azure-hosted production APIs.</p>
           </div>
         </Reveal>
       </div>
@@ -308,11 +320,11 @@ function Work() {
         <SectionLabel number="02">Selected work</SectionLabel>
         <Reveal className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
           <h2 className="section-heading">Systems with a job to do.</h2>
-          <p className="max-w-xl text-base leading-7 text-secondary lg:justify-self-end">Production AI built around measurable operating outcomes: fewer manual hours, better decisions, and infrastructure that holds up after launch.</p>
+          <p className="max-w-xl text-base leading-7 text-secondary lg:justify-self-end">Applied AI, machine learning, and data science built around measurable outcomes: stronger predictions, faster decisions, intelligent automation, and infrastructure that holds up after launch.</p>
         </Reveal>
       </div>
       <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12">
-        {projects.map((project, index) => <Project key={project.title} project={project} index={index} />)}
+        {featuredProjects.map((project, index) => <Project key={project.title} project={project} index={index} />)}
       </div>
       <div className="section-shell pt-12 sm:pt-16">
         <Reveal>
@@ -345,7 +357,7 @@ function Expertise() {
       <div className="grid gap-10 lg:grid-cols-[0.75fr_1.25fr] lg:gap-20">
         <Reveal>
           <h2 className="section-heading">Deep enough to build. Broad enough to ship.</h2>
-          <p className="mt-6 max-w-lg text-base leading-7 text-secondary">From model selection to authenticated endpoints, I cover the full path between an AI opportunity and a working production system.</p>
+          <p className="mt-6 max-w-lg text-base leading-7 text-secondary">From RAG and agentic architectures to predictive models, data pipelines, and authenticated endpoints, I cover the full path from exploration to a working production system.</p>
         </Reveal>
         <div className="border-t border-white/10">
           {expertise.map((group, index) => (
@@ -384,9 +396,9 @@ function Experience() {
                 </div>
                 <span className="font-mono text-[10px] uppercase tracking-[0.12em] text-muted">Jul 2025 - Present</span>
               </div>
-              <p className="mt-6 max-w-3xl text-base leading-7 text-secondary">Building production document intelligence, semantic matching, forecasting, geospatial analytics, and Azure-hosted ML services at one of Pakistan&apos;s largest banks.</p>
+              <p className="mt-6 max-w-3xl text-base leading-7 text-secondary">Building and deploying production AI, machine learning, and data science solutions across semantic matching, forecasting, geospatial analytics, document intelligence, and Azure-hosted ML services at one of Pakistan&apos;s largest banks.</p>
               <div className="mt-7 flex flex-wrap gap-2">
-                {['Production AI', 'Azure ML', 'Document intelligence', 'Forecasting', 'Geospatial'].map((item) => <span className="tech-pill" key={item}>{item}</span>)}
+                {['Production AI', 'Machine learning', 'Data science', 'Azure ML', 'LLM systems'].map((item) => <span className="tech-pill" key={item}>{item}</span>)}
               </div>
             </article>
           </Reveal>
@@ -416,7 +428,7 @@ function Contact() {
         <SectionLabel number="05">Contact</SectionLabel>
         <Reveal>
           <p className="font-mono text-[10px] uppercase tracking-[0.17em] text-accent">Have a system that should work smarter?</p>
-          <h2 className="mt-7 max-w-5xl font-display text-[clamp(3.2rem,8vw,7.5rem)] font-medium leading-[0.88] tracking-[-0.07em] text-white">Let&apos;s turn the bottleneck into an advantage.</h2>
+          <h2 className="mt-7 max-w-5xl font-display text-[clamp(3.2rem,8vw,7.5rem)] font-medium leading-[0.88] tracking-[-0.07em] text-white">Let&apos;s build the system that moves your business forward.</h2>
         </Reveal>
         <Reveal delay={0.1} className="mt-12 flex flex-col gap-7 border-t border-white/10 pt-8 sm:flex-row sm:items-center sm:justify-between">
           <a href={links.email} className="group inline-flex items-center gap-3 break-all font-display text-base font-medium tracking-[-0.03em] text-white sm:break-normal sm:text-2xl">
